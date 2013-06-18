@@ -1,8 +1,8 @@
 {
     "name": "SoHub",
     "private": true,
-    "version": "0.0.0",
-    "description": "a Sails application",
+    "version": "0.0.1",
+    "description": "social media information hub and aggregator application",
     "dependencies": {
         "sails": "0.8.91",
         "optimist": "0.4.0"
@@ -12,7 +12,7 @@
         "debug": "node debug app.js"
     },
     "main": "app.js",
-    "repository": "",
+    "repository": "git@github.com:wahyd4/sohub.git",
     "author": "",
     "license": "MIT"
 }
