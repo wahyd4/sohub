@@ -1,0 +1,2 @@
+# SoHub
+### a Sails application
