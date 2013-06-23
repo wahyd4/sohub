@@ -18,4 +18,4 @@ sails lift
 or
 ```bash
 node app.js
-``
+```
