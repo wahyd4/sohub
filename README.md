@@ -9,3 +9,13 @@
 
 A aggregater of all kinds of social messages and other streams
 
+
+
+## start server
+```bash
+sails lift
+```
+or
+```bash
+node app.js
+``
