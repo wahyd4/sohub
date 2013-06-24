@@ -25,7 +25,17 @@ module.exports.routes = {
 	// To route the home page to the "index" action of the "home" controller:
 	'/' : {
 		controller	: 'home'
-	}
+	} ,
+    'get /wx/query':{
+        controller : 'weixin',
+        action: 'auth'
+    },
+    'post /wx/query':{
+        controller : 'weixin',
+        action: 'query'
+    }
+
+
 
 	// If you want to set up a route only for a particular HTTP method/verb 
 	// (GET, POST, PUT, DELETE) you can specify the verb before the path:
