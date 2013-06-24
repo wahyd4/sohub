@@ -30,6 +30,14 @@ module.exports.routes = {
         controller: 'dashboard',
         action: 'view'
     },
+    'get /dashboard/text': {
+        controller: 'dashboard',
+        action: 'viewText'
+    },
+    'get /dashboard/image': {
+        controller: 'dashboard',
+        action: 'viewImage'
+    },
     'get /wx/query': {
         controller: 'weixin',
         action: 'auth'
