@@ -23,9 +23,9 @@
 module.exports.routes = {
 
 //    To route the home page to the "index" action of the "home" controller:
-	'/' : {
-		controller	: 'home'
-	} ,
+    '/': {
+        controller: 'home'
+    },
     'get /dashboard': {
         controller: 'dashboard',
         action: 'view'
@@ -45,6 +45,10 @@ module.exports.routes = {
     'post /wx/query': {
         controller: 'weixin',
         action: 'query'
+    },
+    'get /mock': {
+        controller: 'dashboard',
+        action: 'mockData'
     }
 
 
