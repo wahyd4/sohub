@@ -6,8 +6,8 @@ $(document).ready(function () {
             console.log(json);
             var content = $('.content');
             for (var i = 0; i < json.length; i++) {
-                $('figure').append('<img src="+json[i].pictureUrl+">').appendTo(content);
-
+                var item = $('<figure></figure>').append('<img src="+json[i].pictureUrl+">');
+                content.append(item);
             }
         })
         .fail(function (error) {
