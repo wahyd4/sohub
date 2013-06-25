@@ -1,0 +1,15 @@
+a{
+    text-decoration: none;
+}
+h1 a {
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    text-decoration: none;
+}
+.container{
+    min-height: 400px;
+}
+
+.footer{
+    text-align: center;
+}

@@ -11,8 +11,13 @@
 	</head>
 
 	<body>
-		<%- body %>
+	    <div class="container pure-g">
+		    <%- body %>
+	    </div>
 
+        <div id="footer" class="pure-g footer">
+            <a target="_blank" href="http://sohub.herokuapp.com" class="copyright pure-u-1">&copy; 2013 Junv</a>
+        </div>
 		<!-- Templates from your view path are included here -->
 		<%- assets.templateLibrary() %>
 		<!-- Javascripts from your assets folder are included here -->

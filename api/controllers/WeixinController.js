@@ -32,7 +32,7 @@ var WeixinController = {
                     res.reply('你的图片：' + message.pictureUrl + '已经成功收到！！');
                 });
         }else{
-            res.reply('呜呜，你发到消息我看不懂。');
+            res.reply('呜呜，你发的消息我看不懂。');
         }
     })
 
