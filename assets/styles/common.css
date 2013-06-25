@@ -13,3 +13,12 @@ h1 a {
 .footer{
     text-align: center;
 }
+
+.item{
+    margin: 1.3em 0 1em;
+    padding: 1.3em;
+    font-family: Consolas, 'Liberation Mono', Courier, monospace;
+    color: #333;
+    background: rgb(250, 250, 250);
+    border: 1px solid #eee;
+}

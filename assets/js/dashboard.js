@@ -1,12 +1,12 @@
 $(document).ready(function () {
-    $.get('/dashboard/image', function (json) {
+    $.get('/dashboard/text', function (json) {
         console.log('request success...');
     })
         .done(function (json) {
             console.log(json);
             var content = $('.content');
             for (var i = 0; i < json.length; i++) {
-                var item = $('<figure></figure>').append('<img src="'+json[i].pictureUrl+'">');
+                var item = $('<div class="item"></div>').append('<blockquote>'+json[i].content+'</blockquote>');
                 content.append(item);
             }
         })
