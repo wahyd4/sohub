@@ -6,9 +6,25 @@ $(document).ready(function () {
             console.log(json);
             var content = $('.content');
             for (var i = 0; i < json.length; i++) {
-                var item = $('<div class="item"></div>').append('<blockquote>'+json[i].content+'</blockquote>');
+                var item = $('<li class="alert"></li>');
+                item.append('<blockquote>' + json[i].content + '</blockquote>');
+                switch (i % 4) {
+                    case 3:
+                        item.addClass('alert-info');
+                        break;
+                    case 2:
+                        item.addClass('alert-error');
+                        break;
+                    case 1:
+                        item.addClass('alert-success');
+                        break;
+                    default:
+                        break;
+
+                }
                 content.append(item);
             }
+
         })
         .fail(function (error) {
             console.log('出错了！');
