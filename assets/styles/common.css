@@ -25,3 +25,7 @@ h1 a {
 .content li{
     list-style: none;
 }
+
+.content li .footprint{
+    font-size: 10px;
+}
