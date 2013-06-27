@@ -24,7 +24,7 @@ $(document).ready(function () {
                 }
                 var footprint = $('<div></div>').addClass('footprint');
                 footprint.append('<div>发送者：' + json[i].fromUser + '</div>');
-                footprint.append('<div>发送于：' + json[i].createTime + '</div>');
+                footprint.append('<div>发送于：' + timeSince(json[i].createTime) + '</div>');
                 item.append(footprint);
                 content.append(item);
             }
