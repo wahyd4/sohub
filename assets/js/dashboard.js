@@ -32,7 +32,6 @@ $(document).ready(function () {
 
             var flag = 3;
             setInterval(function () {
-                console.log(flag + "======")
                 var children = content.children();
                 if (flag >= children.length) {
                     //reset the flag to 0
@@ -50,7 +49,6 @@ $(document).ready(function () {
                 flag = flag + 3;
 
             }, 5000);
-            console.log('flag====' + flag);
 
         })
         .fail(function (error) {
