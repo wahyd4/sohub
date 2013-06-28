@@ -27,7 +27,30 @@ $(document).ready(function () {
                 footprint.append('<div>发送于：' + timeSince(json[i].createTime) + '</div>');
                 item.append(footprint);
                 content.append(item);
+
             }
+
+            var flag = 3;
+            setInterval(function () {
+                console.log(flag + "======")
+                var children = content.children();
+                if (flag >= children.length) {
+                    //reset the flag to 0
+                    flag = 0;
+                }
+                //hide all the children nodes
+                for (var j = 0; j < children.length; j++) {
+                    $(children[j]).hide();
+                }
+                //show the next children nodes
+                for (var i = flag; i < flag + 3; i++) {
+                    $(children[i]).show('slow');
+                }
+                //flag +3
+                flag = flag + 3;
+
+            }, 5000);
+            console.log('flag====' + flag);
 
         })
         .fail(function (error) {
