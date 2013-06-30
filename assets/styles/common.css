@@ -45,11 +45,15 @@ ul.content {
 }
 
 .image-content {
-    width: 560px;
+    margin-left: 25px;
     height: 380px;
     overflow: hidden;
     margin-top: 50px;
     border: 1px solid #000000;
     -webkit-box-shadow: 0px 0px 10px 7px #777777;
 
+}
+
+.image-content figure img {
+    max-width: 100%;
 }

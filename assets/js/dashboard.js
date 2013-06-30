@@ -67,7 +67,7 @@ $(document).ready(function () {
             }
         }).done(function () {
                 $('.image-content').boxSlider({
-                    speed: 1000, autoScroll: true, effect: 'tile3d'
+                    speed: 1000, autoScroll: true, effect: 'tile'
                 });
             });
     }, 1000 * 10);
