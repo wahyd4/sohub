@@ -11,7 +11,7 @@ var DashboardController = {
     },
 
     viewImage: function (req, res) {
-        Image.findAll().sort('_id desc').done(function (err, messages) {
+        Image.findAll().sort('_id desc').limit(8).done(function (err, messages) {
             if (err) return res.send(err, 500);
             res.json(messages);
         });
