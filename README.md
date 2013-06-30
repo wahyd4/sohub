@@ -14,14 +14,20 @@ A aggregater of all kinds of social messages and other streams
 ##安装指南##
 
 + 设置导出系统参数
+
     export ACCESS_ID=
+
     export ACCESS_KEY=
+
     export BUCKET=
+
     export IMAGE_BASE_URL=
 + 运行 npm install
-+ start server
++ 开启服务器
   ```bash
+
   sails lift
+
   ```
 
 ##使用指南##

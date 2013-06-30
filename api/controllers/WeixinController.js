@@ -1,6 +1,7 @@
 var wechat = require('wechat');
 var fs = require('fs');
 var oss = require('nn-oss');
+var request = require('require');
 
 var WeixinController = {
 
