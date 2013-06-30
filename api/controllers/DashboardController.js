@@ -4,18 +4,21 @@ var DashboardController = {
     },
 
     viewText: function (req, res) {
-        Message.findAll().done(function (err, messages) {
+        Message.findAll().sort('_id desc').done(function (err, messages) {
             if (err) return res.send(err, 500);
             res.json(messages);
         });
     },
 
     viewImage: function (req, res) {
-        Image.findAll().done(function (err, messages) {
+        Image.findAll().sort('_id desc').done(function (err, messages) {
             if (err) return res.send(err, 500);
             res.json(messages);
         });
     },
+
+
+
     mockData: function (req, res) {
         Message.create({
             content: 'Hello sohub,现在的时间为' + new Date().toDateString(),

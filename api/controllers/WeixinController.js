@@ -36,7 +36,8 @@ var WeixinController = {
                 client.put_object({  bucket: process.env.BUCKET, object: tempFileName, srcFile: tempFileName, gzip: false},
                     function (err, results) {
                         if (err) throw err;
-                        console.log(results);
+                        res.reply('图片已经成功收到！！');
+
                         //store image in database
                         Image.create({
                             pictureUrl: process.env.IMAGE_BASE_URL + '/' + tempFileName,
@@ -46,7 +47,7 @@ var WeixinController = {
                             messageType: message.MsgType,
                             messageId: message.MsgId
                         }).done(function (err, message) {
-                                res.reply('你的图片：' + message.pictureUrl + '已经成功收到！！');
+                                console.log('图片：' + message.pictureUrl + '发布成功');
                             });
                     }
                 );
