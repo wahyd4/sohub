@@ -5,9 +5,11 @@
     "description": "social media information hub and aggregator application",
     "dependencies": {
         "sails": "0.8.91",
-        "sails-mongo":"0.0.3",
+        "sails-mongo": "0.0.3",
         "optimist": "0.4.0",
-        "wechat":"0.4.4"
+        "wechat": "0.4.4",
+        "nn-oss": "0.0.9",
+        "request": "2.21.0"
     },
     "devDependencies": {
         "mocha": "*"
@@ -20,8 +22,8 @@
     "main": "app.js",
     "repository": "git@github.com:wahyd4/sohub.git",
     "author": "Junv",
-    "devs":[
+    "devs": [
 
-        ],
+    ],
     "license": "MIT"
 }

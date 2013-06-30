@@ -1,4 +1,7 @@
 var wechat = require('wechat');
+var fs = require('fs');
+var oss = require('nn-oss');
+
 var WeixinController = {
 
     auth: wechat('filhsafghJOj323kskdv', function (req, res, next) {
@@ -20,18 +23,34 @@ var WeixinController = {
             }).done(function (err, message) {
                     res.reply('你的消息：' + message.content + '已经成功收到！请访问：http://sohub.herokuapp.com/dashboard');
                 });
-        }else if (message.MsgType === 'image') {
-            Image.create({
-                pictureUrl: message.PicUrl,
-                createTime: message.CreateTime,
-                fromUser: message.FromUserName,
-                toUser: message.ToUserName,
-                messageType: message.MsgType,
-                messageId: message.MsgId
-            }).done(function (err, message) {
-                    res.reply('你的图片：' + message.pictureUrl + '已经成功收到！！');
-                });
-        }else{
+        } else if (message.MsgType === 'image') {
+            var tempFileName = new Date().getTime() + '.jpg';
+            request(message.PicUrl).pipe(fs.createWriteStream(tempFileName));
+
+            var client = new oss({
+                accessId: process.env.ACCESS_ID,
+                accessKey: process.env.ACCESS_KEY
+            });
+
+            client.put_object({  bucket: process.env.BUCKET, object: tempFileName, srcFile: __dirname + "/" + tempFileName},
+                function (err, results) {
+                    if (err) throw err;
+                    console.log(results);
+                    //store image in database
+                    Image.create({
+                        pictureUrl: process.env.IMAGE_BASE_URL + '/' + tempFileName,
+                        createTime: message.CreateTime,
+                        fromUser: message.FromUserName,
+                        toUser: message.ToUserName,
+                        messageType: message.MsgType,
+                        messageId: message.MsgId
+                    }).done(function (err, message) {
+                            res.reply('你的图片：' + message.pictureUrl + '已经成功收到！！');
+                        });
+                }
+            );
+
+        } else {
             res.reply('呜呜，你发的消息我看不懂。');
         }
     })
