@@ -25,7 +25,7 @@ var WeixinController = {
                     res.reply('你的消息：' + message.content + '已经成功收到！请访问：http://sohub.herokuapp.com/dashboard');
                 });
         } else if (message.MsgType === 'image') {
-            var tempFileName = new Date().getTime() + '.jpg';
+            var tempFileName = new Date().getTime() + '.jpeg';
             request(message.PicUrl).pipe(fs.createWriteStream(tempFileName));
 
             var client = new oss({
@@ -33,7 +33,7 @@ var WeixinController = {
                 accessKey: process.env.ACCESS_KEY
             });
 
-            client.put_object({  bucket: process.env.BUCKET, object: tempFileName, srcFile: tempFileName},
+            client.put_object({  bucket: process.env.BUCKET, object: tempFileName, srcFile: tempFileName, gzip: false},
                 function (err, results) {
                     if (err) throw err;
                     console.log(results);
