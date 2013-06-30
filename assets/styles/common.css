@@ -58,3 +58,12 @@ ul.content {
 .image-content figure img {
     max-width: 100%;
 }
+
+.footer{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+.footer a{
+    margin-left: 40px;
+}
