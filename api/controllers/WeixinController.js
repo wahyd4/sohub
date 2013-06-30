@@ -33,7 +33,7 @@ var WeixinController = {
                 accessKey: process.env.ACCESS_KEY
             });
 
-            client.put_object({  bucket: process.env.BUCKET, object: tempFileName, srcFile: __dirname + "/" + tempFileName},
+            client.put_object({  bucket: process.env.BUCKET, object: tempFileName, srcFile: tempFileName},
                 function (err, results) {
                     if (err) throw err;
                     console.log(results);
