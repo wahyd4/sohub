@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $.get('/dashboard/text', function (json) {
-        console.log('request success...');
+//        console.log('request success...');
     })
         .done(function (json) {
             console.log(json);
@@ -48,11 +48,28 @@ $(document).ready(function () {
                 //flag +3
                 flag = flag + 3;
 
-            }, 5000);
+            }, 1000 * 10);
 
         })
         .fail(function (error) {
             console.log('出错了！');
         });
+
+    //delay 1 minute to display images
+    setTimeout(function () {
+        $.get('/dashboard/image',function (json) {
+            var imageContainer = $('.image-content');
+            for (var i = 0; i < json.length; i++) {
+                var item = $('<figure></figure>');
+                item.append('<img src="' + json[i].pictureUrl + '">');
+                imageContainer.append(item);
+
+            }
+        }).done(function () {
+                $('.image-content').boxSlider({
+                    speed: 1000, autoScroll: true, effect: 'tile3d'
+                });
+            });
+    }, 1000 * 10);
 
 });
