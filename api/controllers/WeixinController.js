@@ -16,7 +16,7 @@ var WeixinController = {
         if (message.MsgType === 'text') {
             Message.create({
                 content: message.Content,
-                createTime: message.CreateTime,
+                createTime: new Date().getTime(),
                 fromUser: message.FromUserName,
                 toUser: message.ToUserName,
                 messageType: message.MsgType,
@@ -41,7 +41,7 @@ var WeixinController = {
                         //store image in database
                         Image.create({
                             pictureUrl: process.env.IMAGE_BASE_URL + '/' + tempFileName,
-                            createTime: message.CreateTime,
+                            createTime: new Date().getTime(),
                             fromUser: message.FromUserName,
                             toUser: message.ToUserName,
                             messageType: message.MsgType,
