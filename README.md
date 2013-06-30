@@ -11,14 +11,19 @@ A aggregater of all kinds of social messages and other streams
 
 
 
-## start server
-```bash
-sails lift
-```
-or
-```bash
-node app.js
-```
+##安装指南##
+
++ 设置导出系统参数
+    export ACCESS_ID=
+    export ACCESS_KEY=
+    export BUCKET=
+    export IMAGE_BASE_URL=
++ 运行 npm install
++ start server
+  ```bash
+  sails lift
+  ```
+
 ##使用指南##
 
 + 使用微信帐号发布消息，请添加微信帐号go_serv
