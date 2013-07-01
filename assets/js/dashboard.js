@@ -4,7 +4,9 @@ $(document).ready(function () {
     var nextChildToShow = 1;
     var textMessageCount = 4;
 
-
+    /**
+     * 为消息显示进度条
+     */
     function processBar() {
         var flag = 1;
         var int = setInterval(function () {
