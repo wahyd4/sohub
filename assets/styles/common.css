@@ -7,8 +7,16 @@ h1 a {
     text-decoration: none;
 }
 
-.container {
-    min-height: 400px;
+.main-container {
+    height: 540px;
+    border: 1px solid #000000;
+    overflow: hidden;
+    padding: 10px;
+    box-shadow: 0px 0px 10px 7px #777777;
+}
+
+.main-container ul {
+    margin-left: 0px;
 }
 
 .footer {
@@ -24,19 +32,11 @@ h1 a {
     border: 1px solid #eee;
 }
 
-ul.content {
-    height: 540px;
-    border: 1px solid #000000;
-    overflow: hidden;
-    padding: 10px;
-    box-shadow: 0px 0px 10px 7px #777777;
-}
-
 .content li {
     list-style: none;
 }
 
-.content li.alert{
+.content li.alert {
     padding: 19px 35px 19px 14px;
 }
 
@@ -49,13 +49,13 @@ ul.content {
 }
 
 .image-content {
-    margin-left: 25px;
-    height: 540px;
-    overflow: hidden;
-    margin-top: 50px;
-    border: 1px solid #000000;
-    box-shadow: 0px 0px 10px 7px #777777;
-    background-repeat: no-repeat;
+    /*margin-left: 25px;*/
+    /*height: 540px;*/
+    /*overflow: hidden;*/
+    /*margin-top: 50px;*/
+    /*border: 1px solid #000000;*/
+    /*box-shadow: 0px 0px 10px 7px #777777;*/
+    /*background-repeat: no-repeat;*/
 
 }
 
@@ -63,11 +63,12 @@ ul.content {
     max-width: 100%;
 }
 
-.footer{
+.footer {
     margin-top: 20px;
     margin-bottom: 20px;
     font-size: 14px;
 }
-.footer a{
+
+.footer a {
     margin-left: 40px;
 }
