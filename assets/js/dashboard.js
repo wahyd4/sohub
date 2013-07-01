@@ -1,4 +1,34 @@
 $(document).ready(function () {
+
+    var interval = 1000 * 60;
+    var nextChildToShow = 1;
+    var textMessageCount = 4;
+
+
+    /**
+     * 循环显示不同类型的消息
+     * @param interval
+     * @param nextChildToShow
+     */
+    function cycling(interval, nextChildToShow) {
+        setInterval(function () {
+            var containers = $('.main-container').children();
+            hideAllChildren('.main-container');
+            var nextContainer = containers[nextChildToShow] || containers[0];
+            $(nextContainer).show('slow');
+
+            console.log('====='+nextChildToShow);
+
+            if (nextChildToShow === containers.length) {
+                nextChildToShow = 0;
+            }
+            nextChildToShow++;
+        }, interval);
+    }
+
+    cycling(interval, nextChildToShow);
+
+    //get json
     $.get('/dashboard/text', function (json) {
 //        console.log('request success...');
     })
@@ -30,7 +60,7 @@ $(document).ready(function () {
 
             }
 
-            var flag = 3;
+            var flag = textMessageCount;
             setInterval(function () {
                 var children = content.children();
                 if (flag >= children.length) {
@@ -42,11 +72,11 @@ $(document).ready(function () {
                     $(children[j]).hide();
                 }
                 //show the next children nodes
-                for (var i = flag; i < flag + 3; i++) {
+                for (var i = flag; i < flag + textMessageCount; i++) {
                     $(children[i]).show('slow');
                 }
                 //flag +3
-                flag = flag + 3;
+                flag = flag + textMessageCount;
 
             }, 1000 * 10);
 
@@ -70,6 +100,6 @@ $(document).ready(function () {
                     speed: 1000, autoScroll: true, effect: 'tile'
                 });
             });
-    }, 1000 * 10);
+    }, interval - 1000 * 30);
 
 });

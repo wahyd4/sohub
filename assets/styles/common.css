@@ -25,7 +25,7 @@ h1 a {
 }
 
 ul.content {
-    height: 340px;
+    height: 540px;
     border: 1px solid #000000;
     overflow: hidden;
     padding: 10px;
@@ -34,6 +34,10 @@ ul.content {
 
 .content li {
     list-style: none;
+}
+
+.content li.alert{
+    padding: 19px 35px 19px 14px;
 }
 
 .content li blockquote {

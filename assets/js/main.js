@@ -25,3 +25,15 @@ function timeSince(date) {
     }
     return Math.floor(seconds) + " 秒前";
 }
+
+/**
+ *
+ * 隐藏此对象的所有只节点
+ * @param div jquery obj
+ */
+function hideAllChildren(div){
+    var children = $(div).children();
+    for (var j = 0; j < children.length; j++) {
+        $(children[j]).hide();
+    }
+}
