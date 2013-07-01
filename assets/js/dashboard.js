@@ -5,6 +5,20 @@ $(document).ready(function () {
     var textMessageCount = 4;
 
 
+    function processBar() {
+        var flag = 1;
+        var int = setInterval(function () {
+            var bar = $('.bar');
+            bar.css('width', flag + '%');
+            flag += 100 / (interval / 1000);
+            if (flag > 100 - 100 / (interval / 1000)) {
+                bar.css('width', '100%');
+                clearInterval(int);
+                bar.css('width', '1%');
+            }
+        }, 1000);
+    }
+
     /**
      * 循环显示不同类型的消息
      * @param interval
@@ -17,7 +31,7 @@ $(document).ready(function () {
             var nextContainer = containers[nextChildToShow] || containers[0];
             $(nextContainer).show('slow');
 
-            console.log('====='+nextChildToShow);
+            processBar();
 
             if (nextChildToShow === containers.length) {
                 nextChildToShow = 0;
@@ -27,6 +41,7 @@ $(document).ready(function () {
     }
 
     cycling(interval, nextChildToShow);
+    processBar();
 
     //get json
     $.get('/dashboard/text', function (json) {
