@@ -9,7 +9,8 @@
         "optimist": "0.4.0",
         "wechat": "0.4.4",
         "nn-oss": "0.0.9",
-        "request": "2.21.0"
+        "request": "2.21.0",
+        "weibo": "0.6.9"
     },
     "devDependencies": {
         "mocha": "*"

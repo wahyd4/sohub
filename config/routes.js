@@ -49,6 +49,10 @@ module.exports.routes = {
     'get /mock': {
         controller: 'dashboard',
         action: 'mockData'
+    },
+    'get /weibo/index': {
+        controller: 'weibo',
+        action: 'index'
     }
 
 

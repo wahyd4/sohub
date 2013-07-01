@@ -18,7 +18,6 @@ var DashboardController = {
     },
 
 
-
     mockData: function (req, res) {
         Message.create({
             content: 'Hello sohub,现在的时间为' + new Date().toDateString(),
