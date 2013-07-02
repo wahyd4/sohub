@@ -107,14 +107,26 @@ $(document).ready(function () {
         $.get('/dashboard/image',function (json) {
             var imageContainer = $('.image-content');
             for (var i = 0; i < json.length; i++) {
-                var item = $('<figure></figure>');
+                var item = $('<a href="#"></a>');
                 item.append('<img src="' + json[i].pictureUrl + '">');
                 imageContainer.append(item);
 
             }
         }).done(function () {
-                $('.image-content').boxSlider({
-                    speed: 1000, autoScroll: true, effect: 'tile'
+
+                $('.image-content').nivoSlider({
+                    effect: 'random', // Specify sets like: 'fold,fade,sliceDown'
+                    slices: 15, // For slice animations
+                    boxCols: 8, // For box animations
+                    boxRows: 4, // For box animations
+                    animSpeed: 500, // Slide transition speed
+                    pauseTime: 3000, // How long each slide will show
+                    startSlide: 0, // Set starting Slide (0 index)
+                    directionNav: false, // Next & Prev navigation
+                    controlNav: false, // 1,2,3... navigation
+                    controlNavThumbs: false, // Use thumbnails for Control Nav
+                    pauseOnHover: false, // Stop animation while hovering
+                    manualAdvance: false // Force manual transitions
                 });
             });
     }, interval - 1000 * 30);
