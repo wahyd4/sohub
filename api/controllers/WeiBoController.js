@@ -3,6 +3,8 @@ var weibo = require('weibo');
 var appkey = '3410683097';
 var secret = '552c859d2354fc66d984f907b991687f';
 var oauth_callback_url = '/weibo/index';
+var accesstoken = '2.00v2dA9ChTsoiD098629aa0a08d3g1';
+
 weibo.init('weibo', appkey, secret, oauth_callback_url);
 
 
@@ -23,16 +25,18 @@ var WeiboController = {
 
 
     index: function (req, res) {
-        var user = req.session.oauthUser;
-        res.writeHeader(200, { 'Content-Type': 'text/html' });
-        if (!user) {
-            res.end('Login with <a href="/weibo/login?type=weibo">Weibo</a>');
-            return;
-        }
 
-        res.end('Hello, <img src="' + user.profile_image_url + ' <a href="' + user.t_url + '" target="_blank">@' + user.screen_name + '</a>. ' + '<a href="/logout">Logout</a>');
+        var user = { blogtype: 'weibo', access_token: accesstoken };
+        var cursor = {count: 20, source: appkey};
+        weibo.public_timeline(user, cursor, function (err, statuses) {
+            if (err) {
+                console.error(err);
+            } else {
+                console.log(statuses);
+                res.view(statuses);
+            }
+        });
     }
-
 };
 
 module.exports = WeiboController;
