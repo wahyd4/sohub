@@ -1,4 +1,51 @@
 $(document).ready(function () {
+
+    var interval = 1000 * 60;
+    var nextChildToShow = 1;
+    var textMessageCount = 4;
+
+    /**
+     * 为消息显示进度条
+     */
+    function processBar() {
+        var flag = 1;
+        var int = setInterval(function () {
+            var bar = $('.bar');
+            bar.css('width', flag + '%');
+            flag += 100 / (interval / 1000);
+            if (flag > 100 - 100 / (interval / 1000)) {
+                bar.css('width', '100%');
+                clearInterval(int);
+                bar.css('width', '1%');
+            }
+        }, 1000);
+    }
+
+    /**
+     * 循环显示不同类型的消息
+     * @param interval
+     * @param nextChildToShow
+     */
+    function cycling(interval, nextChildToShow) {
+        setInterval(function () {
+            var containers = $('.main-container').children();
+            hideAllChildren('.main-container');
+            var nextContainer = containers[nextChildToShow] || containers[0];
+            $(nextContainer).show('slow');
+
+            processBar();
+
+            if (nextChildToShow === containers.length) {
+                nextChildToShow = 0;
+            }
+            nextChildToShow++;
+        }, interval);
+    }
+
+    cycling(interval, nextChildToShow);
+    processBar();
+
+    //get json
     $.get('/dashboard/text', function (json) {
 //        console.log('request success...');
     })
@@ -30,7 +77,7 @@ $(document).ready(function () {
 
             }
 
-            var flag = 3;
+            var flag = textMessageCount;
             setInterval(function () {
                 var children = content.children();
                 if (flag >= children.length) {
@@ -42,11 +89,11 @@ $(document).ready(function () {
                     $(children[j]).hide();
                 }
                 //show the next children nodes
-                for (var i = flag; i < flag + 3; i++) {
+                for (var i = flag; i < flag + textMessageCount; i++) {
                     $(children[i]).show('slow');
                 }
                 //flag +3
-                flag = flag + 3;
+                flag = flag + textMessageCount;
 
             }, 1000 * 10);
 
@@ -60,16 +107,28 @@ $(document).ready(function () {
         $.get('/dashboard/image',function (json) {
             var imageContainer = $('.image-content');
             for (var i = 0; i < json.length; i++) {
-                var item = $('<figure></figure>');
+                var item = $('<a href="#"></a>');
                 item.append('<img src="' + json[i].pictureUrl + '">');
                 imageContainer.append(item);
 
             }
         }).done(function () {
-                $('.image-content').boxSlider({
-                    speed: 1000, autoScroll: true, effect: 'tile'
+
+                $('.image-content').nivoSlider({
+                    effect: 'random', // Specify sets like: 'fold,fade,sliceDown'
+                    slices: 15, // For slice animations
+                    boxCols: 8, // For box animations
+                    boxRows: 4, // For box animations
+                    animSpeed: 500, // Slide transition speed
+                    pauseTime: 3000, // How long each slide will show
+                    startSlide: 0, // Set starting Slide (0 index)
+                    directionNav: false, // Next & Prev navigation
+                    controlNav: false, // 1,2,3... navigation
+                    controlNavThumbs: false, // Use thumbnails for Control Nav
+                    pauseOnHover: false, // Stop animation while hovering
+                    manualAdvance: false // Force manual transitions
                 });
             });
-    }, 1000 * 10);
+    }, interval - 1000 * 30);
 
 });

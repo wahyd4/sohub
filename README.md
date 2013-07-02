@@ -40,3 +40,8 @@ A aggregater of all kinds of social messages and other streams
  + 通过微信发送通知消息
  + 抓取Weibo状态进行显示
  + 同步Google Calendar显示
+
+
+
+##更新日志##
++ 2013.7.1 将图片和文本信息合并到一个容器中显示，并添加了进度条，这样用户可以大概知道当前信息还会显示多长时间
