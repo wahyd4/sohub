@@ -1,7 +1,13 @@
 <% items.forEach(function(entry) {%>
 
-<div><%= entry.created_at %></div>
-<div><%= entry.text %></div>
+<div class="row-fluid">
+<div class="span4">
+<h2><%= entry.user.name %></h2>
+<p><%= entry.text %></p>
+<p><%= entry.created_at %></p>
+</div>
+</div>
 
 <%  }); %>
+
 
