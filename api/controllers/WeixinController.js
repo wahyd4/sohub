@@ -14,6 +14,9 @@ var WeixinController = {
         var message = req.weixin;
         console.log(message);
         if (message.MsgType === 'text') {
+            if (message.Content.trim === 'help') {
+                res.send('菜单：\n 1. 添加用户名\n 2.选择盒子\n');
+            }
             if (Message.isValidNoticeMessage(message.Content)) {
                 message.MsgType = 'notice';
             }
@@ -40,8 +43,6 @@ var WeixinController = {
                 client.put_object({  bucket: process.env.BUCKET, object: tempFileName, srcFile: tempFileName, gzip: false},
                     function (err, results) {
                         if (err) throw err;
-                        res.reply('图片已经成功收到！！');
-
                         //store image in database
                         Image.create({
                             pictureUrl: process.env.IMAGE_BASE_URL + '/' + tempFileName,
@@ -52,6 +53,7 @@ var WeixinController = {
                             messageId: message.MsgId
                         }).done(function (err, message) {
                                 console.log('图片：' + message.pictureUrl + '发布成功');
+                                res.reply('图片已经成功收到！！');
                             });
                     }
                 );
