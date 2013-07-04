@@ -16,18 +16,18 @@ var WeixinController = {
         if (message.MsgType === 'text') {
             if (Message.isValidNoticeMessage(message.Content)) {
                 message.MsgType = 'notice';
-            } else {
-                Message.create({
-                    content: message.Content,
-                    createTime: new Date().getTime(),
-                    fromUser: message.FromUserName,
-                    toUser: message.ToUserName,
-                    messageType: message.MsgType,
-                    messageId: message.MsgId
-                }).done(function (err, message) {
-                        res.reply('你的消息：' + message.content + '已收到');
-                    });
             }
+            Message.create({
+                content: message.Content,
+                createTime: new Date().getTime(),
+                fromUser: message.FromUserName,
+                toUser: message.ToUserName,
+                messageType: message.MsgType,
+                messageId: message.MsgId
+            }).done(function (err, message) {
+                    res.reply('你的消息：' + message.content + '已收到');
+                });
+
         } else if (message.MsgType === 'image') {
             request(message.PicUrl,function () {
                 //excute when download image finished
