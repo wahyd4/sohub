@@ -14,11 +14,9 @@ var WeixinController = {
         var message = req.weixin;
         console.log(message);
         if (message.MsgType === 'text') {
-            if(Message.isValidNoticeMessage(message.Content)){
-                console.log('is......');
-            }else{
-                console.log('Not......');
-
+            if (Message.isValidNoticeMessage(message.Content)) {
+                message.MsgType = 'notice';
+            } else {
                 Message.create({
                     content: message.Content,
                     createTime: new Date().getTime(),
@@ -52,14 +50,12 @@ var WeixinController = {
                         }).done(function (err, message) {
                                 console.log('图片：' + message.pictureUrl + '发布成功');
                             });
-
-                        res.reply('图片已经成功收到！！');
                     }
                 );
 
             }).pipe(fs.createWriteStream(tempFileName));
             var tempFileName = new Date().getTime() + '.jpeg';
-
+            res.reply('图片已经成功收到！！');
 
         } else {
             res.reply('呜呜，你发的消息我看不懂。');
