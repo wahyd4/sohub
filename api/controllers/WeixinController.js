@@ -15,7 +15,7 @@ var WeixinController = {
         console.log(message);
         if (message.MsgType === 'text') {
             if (message.Content.trim === 'help') {
-                res.send('菜单：\n 1. 添加用户名\n 2.选择盒子\n');
+                res.reply('菜单：\n 1. 添加用户名\n 2.选择盒子\n');
             }
             if (Message.isValidNoticeMessage(message.Content)) {
                 message.MsgType = 'notice';
