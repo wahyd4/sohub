@@ -29,6 +29,7 @@ var WeixinController = {
                 });
 
         } else if (message.MsgType === 'image') {
+            var tempFileName = new Date().getTime() + '.jpeg';
             request(message.PicUrl,function () {
                 //excute when download image finished
                 var client = new oss({
@@ -39,6 +40,8 @@ var WeixinController = {
                 client.put_object({  bucket: process.env.BUCKET, object: tempFileName, srcFile: tempFileName, gzip: false},
                     function (err, results) {
                         if (err) throw err;
+                        res.reply('图片已经成功收到！！');
+
                         //store image in database
                         Image.create({
                             pictureUrl: process.env.IMAGE_BASE_URL + '/' + tempFileName,
@@ -49,13 +52,10 @@ var WeixinController = {
                             messageId: message.MsgId
                         }).done(function (err, message) {
                                 console.log('图片：' + message.pictureUrl + '发布成功');
-                                res.reply('图片已经成功收到！！');
-
                             });
                     }
                 );
             }).pipe(fs.createWriteStream(tempFileName));
-            var tempFileName = new Date().getTime() + '.jpeg';
 
         } else {
             res.reply('呜呜，你发的消息我看不懂。');
