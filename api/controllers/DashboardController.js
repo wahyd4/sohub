@@ -20,7 +20,7 @@ var DashboardController = {
 
     mockData: function (req, res) {
         Message.create({
-            content: 'Hello sohub,现在的时间为' + new Date().toDateString(),
+            content: '+Hello sohub,现在的时间为' + new Date().toDateString(),
             createTime: new Date().getTime(),
             fromUser: 'oGHz6jqRjNHwBo_a_s',
             toUser: 'gh_418963502e3c',

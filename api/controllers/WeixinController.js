@@ -14,16 +14,22 @@ var WeixinController = {
         var message = req.weixin;
         console.log(message);
         if (message.MsgType === 'text') {
-            Message.create({
-                content: message.Content,
-                createTime: new Date().getTime(),
-                fromUser: message.FromUserName,
-                toUser: message.ToUserName,
-                messageType: message.MsgType,
-                messageId: message.MsgId
-            }).done(function (err, message) {
-                    res.reply('你的消息：' + message.content + '已收到');
-                });
+            if(Message.isValidNoticeMessage(message.Content)){
+                console.log('is......');
+            }else{
+                console.log('Not......');
+
+                Message.create({
+                    content: message.Content,
+                    createTime: new Date().getTime(),
+                    fromUser: message.FromUserName,
+                    toUser: message.ToUserName,
+                    messageType: message.MsgType,
+                    messageId: message.MsgId
+                }).done(function (err, message) {
+                        res.reply('你的消息：' + message.content + '已收到');
+                    });
+            }
         } else if (message.MsgType === 'image') {
             request(message.PicUrl,function () {
                 //excute when download image finished
