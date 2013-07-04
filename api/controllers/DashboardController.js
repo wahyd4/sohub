@@ -4,7 +4,14 @@ var DashboardController = {
     },
 
     viewText: function (req, res) {
-        Message.findAll().sort('_id desc').done(function (err, messages) {
+        Message.findAll({messageType: 'text'}).sort('_id desc').done(function (err, messages) {
+            if (err) return res.send(err, 500);
+            res.json(messages);
+        });
+    },
+
+    viewNotice: function (req, res) {
+        Message.findAll({messageType: 'notice'}).sort('_id desc').done(function (err, messages) {
             if (err) return res.send(err, 500);
             res.json(messages);
         });

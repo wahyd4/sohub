@@ -38,6 +38,10 @@ module.exports.routes = {
         controller: 'dashboard',
         action: 'viewImage'
     },
+    'get /dashboard/notice':{
+        controller: 'dashboard',
+        action: 'viewNotice'
+    },
     'get /wx/query': {
         controller: 'weixin',
         action: 'auth'
