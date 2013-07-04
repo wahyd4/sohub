@@ -6,7 +6,7 @@ var request = require('request');
 var WeixinController = {
 
     auth: wechat('filhsafghJOj323kskdv', function (req, res, next) {
-        res.send(' ');
+        res.reply(' ');
     }),
 
 
@@ -15,7 +15,8 @@ var WeixinController = {
         console.log(message);
         if (message.MsgType === 'text') {
             if (message.Content.trim() === 'help') {
-                res.send('菜单：\n 1. 添加用户名\n 2.选择盒子\n');
+                console.log('============menu=======');
+                res.reply('菜单：\n 1. 添加用户名\n 2.选择盒子\n');
                 return;
             }
             if (Message.isValidNoticeMessage(message.Content)) {
@@ -29,7 +30,7 @@ var WeixinController = {
                 messageType: message.MsgType,
                 messageId: message.MsgId
             }).done(function (err, message) {
-                    res.send('你的消息：' + message.content + '已收到');
+                    res.reply('你的消息：' + message.content + '已收到');
                 });
 
         } else if (message.MsgType === 'image') {
@@ -61,7 +62,7 @@ var WeixinController = {
             }).pipe(fs.createWriteStream(tempFileName));
 
         } else {
-            res.send('呜呜，你发的消息我看不懂。');
+            res.reply('呜呜，你发的消息我看不懂。');
         }
     })
 
