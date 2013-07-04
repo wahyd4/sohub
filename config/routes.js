@@ -57,6 +57,10 @@ module.exports.routes = {
     'get /weibo/index': {
         controller: 'weibo',
         action: 'index'
+    },
+    'get /spike':{
+        controller: 'dashboard',
+        action: 'spike'
     }
 
 

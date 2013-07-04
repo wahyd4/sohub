@@ -47,6 +47,15 @@ var DashboardController = {
                     });
             });
 
+    },
+    spike: function(req,res){
+        if(req.param('name').trim()==='help'){
+            console.log(req.param('name').trim()+'======');
+            res.send('xxxx');
+            return;
+        }
+
+        res.send('yyyyyyyyyy');
     }
 
 };
