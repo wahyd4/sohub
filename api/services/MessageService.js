@@ -20,7 +20,7 @@ var MessageService = {
         if (Message.isValidNoticeMessage(message.Content)) {
             message.MsgType = 'notice';
         }
-        Message.create({
+        return Message.create({
             content: message.Content,
             createTime: new Date().getTime(),
             fromUser: message.FromUserName,
@@ -29,7 +29,7 @@ var MessageService = {
             messageId: message.MsgId
         }).done(function (err, message) {
                 return '你的消息：' + message.content + '已收到';
-            });
+            })
 
     },
     processImage: function (message) {
