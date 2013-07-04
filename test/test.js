@@ -1,5 +1,5 @@
 var assert = require("assert");
-var message = require('../api/models/message');
+var message = require(__dirname+'/../api/models/message');
 
 describe('Array', function () {
     describe('#indexOf()', function () {
