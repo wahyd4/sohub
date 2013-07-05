@@ -1,5 +1,6 @@
 var assert = require("assert");
 var message = require('../api/models/Message.js');
+var constants = require('../api/models/constants/common.js');
 
 describe('Sohub', function () {
     describe('#indexOf()', function () {
@@ -47,6 +48,13 @@ describe('Sohub', function () {
 
             assert.equal(message.isValidNoticeMessage(msg), true);
         });
+    });
+
+    describe('test laod constants', function () {
+        it('should load constants', function () {
+            assert.equal(constants.reply.unKnown,'呜呜，你发的消息我看不懂。');
+        });
+
     });
 
 })

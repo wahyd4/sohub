@@ -2,6 +2,8 @@ var fs = require('fs');
 var oss = require('nn-oss');
 var request = require('request');
 var MessageService = require('./MessageService');
+var constants = require('../api/models/constants/common.js');
+
 
 var WeixinService = {
     handleMessage: function (message, callback) {
@@ -11,7 +13,7 @@ var WeixinService = {
         } else if (message.MsgType === 'image') {
             return this.processImage(message, callback);
         } else {
-            callback(null, '呜呜，你发的消息我看不懂。');
+            callback(null, constants.reply.unKnown);
         }
     },
     processText: function (message, callback) {
@@ -20,11 +22,14 @@ var WeixinService = {
             return MessageService.processTextMessage(message, callback);
         }
 
-        if (content === 'help' || content === 'menu') {
-            callback(null, '菜单：\n 1. 设置用户名\n 2.选择盒子\n');
+        if (content === 'help' || content === 'h') {
+            callback(null, constants.reply.help);
+            return;
+        } else if (content === 'menu' || content === 'm') {
+            callback(null, constants.reply.menu);
             return;
         } else {
-            callback(null, '随便发垃圾消息的孩子，不乖哦！试试help,或者menu吧');
+            callback(null, constants.reply.god);
         }
 
     },
@@ -48,7 +53,6 @@ var WeixinService = {
                         messageType: message.MsgType,
                         messageId: message.MsgId
                     }).done(function (err, message) {
-                            console.log('图片：' + message.pictureUrl + '发布成功');
                             callback('图片已经成功收到！');
                         });
                 }
