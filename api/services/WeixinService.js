@@ -2,7 +2,7 @@ var fs = require('fs');
 var oss = require('nn-oss');
 var request = require('request');
 var MessageService = require('./MessageService');
-var constants = require('../api/models/constants/common.js');
+var constants = require('../models/constants/common.js');
 
 
 var WeixinService = {
