@@ -12,7 +12,10 @@ var WeixinController = {
     query: wechat('filhsafghJOj323kskdv', function (req, res, next) {
         var message = req.weixin;
         console.log(message);
-        res.reply(messageService.handleMessage(message,null));
+        messageService.handleMessage(message, function (err, result) {
+            if (err) throw err;
+            res.reply(result);
+        });
     })
 
 };

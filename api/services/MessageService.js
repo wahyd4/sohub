@@ -5,17 +5,17 @@ var request = require('request');
 var MessageService = {
     handleMessage: function (message, callback) {
         if (message.MsgType === 'text') {
-            return this.processText(message);
+            return this.processText(message, callback);
 
         } else if (message.MsgType === 'image') {
-            return this.processImage(message);
+            return this.processImage(message, callback);
         } else {
             res.reply('呜呜，你发的消息我看不懂。');
         }
     },
-    processText: function (message) {
+    processText: function (message, callback) {
         if (message.Content.trim() === 'help') {
-            return '菜单：\n 1. 设置用户名\n 2.选择盒子\n';
+            callback(null, '菜单：\n 1. 设置用户名\n 2.选择盒子\n');
         }
         if (Message.isValidNoticeMessage(message.Content)) {
             message.MsgType = 'notice';
@@ -28,11 +28,14 @@ var MessageService = {
             messageType: message.MsgType,
             messageId: message.MsgId
         }).done(function (err, message) {
-                return '你的消息：' + message.content + '已收到';
+                if (err) {
+                    callback(new Error(err));
+                }
+                callback(null, '你的消息：' + message.content + '已收到');
             })
 
     },
-    processImage: function (message) {
+    processImage: function (message, callback) {
         var tempFileName = new Date().getTime() + '.jpeg';
         request(message.PicUrl,function () {
             var client = new oss({
@@ -53,7 +56,7 @@ var MessageService = {
                         messageId: message.MsgId
                     }).done(function (err, message) {
                             console.log('图片：' + message.pictureUrl + '发布成功');
-                            return '图片已经成功收到！！';
+                            callback('图片已经成功收到！');
                         });
                 }
             );
