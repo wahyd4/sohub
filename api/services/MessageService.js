@@ -18,12 +18,13 @@ var MessageService = {
             callback(null, '菜单：\n 1. 设置用户名\n 2.选择盒子\n');
             return;
         }
-        if (Message.isValidNoticeMessage(message.Content)) {
+        var originalContent = message.Content;
+        if (Message.isValidNoticeMessage(originalContent)) {
             message.MsgType = 'notice';
-            message.Content.replace('+', '');
+            originalContent = originalContent.replace('+', '');
         }
         Message.create({
-            content: message.Content,
+            content: originalContent,
             createTime: new Date().getTime(),
             fromUser: message.FromUserName,
             toUser: message.ToUserName,

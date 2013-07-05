@@ -21,5 +21,14 @@ describe('Array', function () {
 //                    assert.equal(temp.messageType,'notice');
 //            });
         });
-    })
+    });
+
+    describe('test javascript replace',function(){
+        it('should be replaced',function(){
+            var str = '+你好测试中文';
+            var newStr = str.replace('+','')
+            assert.equal(newStr,'你好测试中文');
+        });
+    });
+
 })
