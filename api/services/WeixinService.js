@@ -1,7 +1,7 @@
 var fs = require('fs');
 var oss = require('nn-oss');
 var request = require('request');
-var MessageService = require('./MessageService.js');
+var MessageService = require('./MessageService');
 
 var WeixinService = {
     handleMessage: function (message, callback) {
@@ -15,13 +15,16 @@ var WeixinService = {
         }
     },
     processText: function (message, callback) {
-        if (message.Content.trim() === 'help') {
-            callback(null, '菜单：\n 1. 设置用户名\n 2.选择盒子\n');
-            return;
+        var content = message.Content.trim();
+        if (Message.isValidMessage(message)) {
+            return MessageService.processTextMessage(message, callback);
         }
 
-        if(Message.isValidMessage(message)){
-            return MessageService.processTextMessage(message,callback);
+        if (content === 'help' || content === 'menu') {
+            callback(null, '菜单：\n 1. 设置用户名\n 2.选择盒子\n');
+            return;
+        } else {
+            callback(null, '随便发垃圾消息的孩子，不乖哦！试试help,或者menu吧');
         }
 
     },
