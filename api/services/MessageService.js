@@ -20,7 +20,7 @@ var MessageService = {
         if (Message.isValidNoticeMessage(message.Content)) {
             message.MsgType = 'notice';
         }
-        return Message.create({
+        Message.create({
             content: message.Content,
             createTime: new Date().getTime(),
             fromUser: message.FromUserName,
