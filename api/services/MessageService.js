@@ -10,7 +10,7 @@ var MessageService = {
         } else if (message.MsgType === 'image') {
             return this.processImage(message, callback);
         } else {
-            res.reply('呜呜，你发的消息我看不懂。');
+            callback(null, '呜呜，你发的消息我看不懂。');
         }
     },
     processText: function (message, callback) {
@@ -20,6 +20,7 @@ var MessageService = {
         }
         if (Message.isValidNoticeMessage(message.Content)) {
             message.MsgType = 'notice';
+            message.Content.replace('+', '');
         }
         Message.create({
             content: message.Content,
