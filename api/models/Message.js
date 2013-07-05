@@ -15,8 +15,8 @@ module.exports = {
      * @param string
      * @returns {boolean}
      */
-    isValidNoticeMessage: function (string) {
-        return new RegExp('^[+]{1}[^+]*$').test(string);
+    isValidNoticeMessage: function (message) {
+        return new RegExp('^[+]{1}[^+-]*$').test(message.Content);
     },
     /**
      * 将普通文本消息改为通知类消息
@@ -35,6 +35,12 @@ module.exports = {
                 return message;
             }
         });
+    },
+    isValidNormalMessage: function (message) {
+        return new RegExp('^[-]{1}[^-+]*$').test(message.Content);
+    },
+    isValidMessage: function (message) {
+        return this.isValidNormalMessage(message) || this.isValidNoticeMessage(message);
     }
 
 };

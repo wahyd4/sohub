@@ -1,5 +1,5 @@
 var wechat = require('wechat');
-var messageService = require('../services/MessageService.js');
+var weixinService = require('../services/WeixinService.js');
 
 
 var WeixinController = {
@@ -12,7 +12,7 @@ var WeixinController = {
     query: wechat('filhsafghJOj323kskdv', function (req, res, next) {
         var message = req.weixin;
         console.log(message);
-        messageService.handleMessage(message, function (err, result) {
+        weixinService.handleMessage(message, function (err, result) {
             if (err) throw err;
             res.reply(result);
         });
