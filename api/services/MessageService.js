@@ -6,6 +6,10 @@ var MessageService = {
             message.MsgType = 'notice';
             originalContent = originalContent.replace('+', '');
         }
+
+        if(Message.isValidNormalMessage(message)){
+            originalContent = originalContent.replace('-', '');
+        }
         Message.create({
             content: originalContent,
             createTime: new Date().getTime(),
