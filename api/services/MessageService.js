@@ -16,6 +16,7 @@ var MessageService = {
     processText: function (message, callback) {
         if (message.Content.trim() === 'help') {
             callback(null, '菜单：\n 1. 设置用户名\n 2.选择盒子\n');
+            return;
         }
         if (Message.isValidNoticeMessage(message.Content)) {
             message.MsgType = 'notice';
@@ -29,7 +30,7 @@ var MessageService = {
             messageId: message.MsgId
         }).done(function (err, message) {
                 if (err) {
-                    callback(new Error(err));
+                    callback(err);
                 }
                 callback(null, '你的消息：' + message.content + '已收到');
             })
