@@ -31,6 +31,7 @@ module.exports = {
             nameId: nameId
         }).done(function (err, user) {
                 if (err) throw err;
+                console.log(user);
                 callback(err, user.name);
             });
     }
