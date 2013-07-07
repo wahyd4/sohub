@@ -3,6 +3,7 @@ var oss = require('nn-oss');
 var request = require('request');
 var MessageService = require('./MessageService');
 var constants = require('../models/constants/common.js');
+var ActionsService = require('./ActionService.js');
 
 
 var WeixinService = {
@@ -28,6 +29,15 @@ var WeixinService = {
         } else if (content === 'menu' || content === 'm') {
             callback(null, constants.reply.menu);
             return;
+        } else if (new RegExp('^[=]{1}[^=-+]*$').test(content)) {
+            ActionsService.setDisplayName(message.FromUserName, content, function (err, result) {
+                if (err) {
+                    callback(null, contants.reply.systemErr);
+                    return;
+                }
+                callback(null, constants.reply.setNameSuccess);
+                return;
+            });
         } else {
             callback(null, constants.reply.god);
         }

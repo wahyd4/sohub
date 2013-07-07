@@ -1,20 +1,28 @@
-/*---------------------
-	:: User
-	-> model
----------------------*/
 module.exports = {
 
-	attributes	: {
+    attributes: {
 
-		// Simple attribute:
-		// name: 'STRING',
+        name: 'STRING'
 
-		// Or for more flexibility:
-		// phoneNumber: {
-		//	type: 'STRING',
-		//	defaultValue: '555-555-5555'
-		// }
-		
-	}
+    },
+
+    setName: function (oldName, newName, callback) {
+        User.update({
+            name: oldName
+        }, {
+            name: newName
+        }).done(function (err, user) {
+                if (err) {
+                    User.create({
+                        name: newName
+                    }).done(function (err, user) {
+                            if (err) callback(err);
+                            callback(null, user);
+                        });
+                }
+                callback(null, user);
+
+            });
+    }
 
 };
