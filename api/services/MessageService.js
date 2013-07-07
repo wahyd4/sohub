@@ -1,3 +1,4 @@
+var User = require('./User.js');
 var MessageService = {
     processTextMessage: function (message, callback) {
         var originalContent = message.Content;
@@ -7,13 +8,17 @@ var MessageService = {
             originalContent = originalContent.replace('+', '');
         }
 
-        if(Message.isValidNormalMessage(message)){
+        if (Message.isValidNormalMessage(message)) {
             originalContent = originalContent.replace('-', '');
         }
+        var userName = '';
+        User.getNameByNameId(message.FromUserName, function (err, name) {
+            userName = name;
+        });
         Message.create({
             content: originalContent,
             createTime: new Date().getTime(),
-            fromUser: message.FromUserName,
+            fromUser: userName,
             toUser: message.ToUserName,
             messageType: message.MsgType,
             messageId: message.MsgId

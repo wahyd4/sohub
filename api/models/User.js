@@ -24,6 +24,15 @@ module.exports = {
             callback(null, user);
 
         });
+    },
+
+    getNameByNameId: function (nameId, callback) {
+        User.find({
+            nameId: nameId
+        }).done(function (err, user) {
+                if (err) throw err;
+                callback(err, user.name);
+            });
     }
 
 };
