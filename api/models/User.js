@@ -19,17 +19,18 @@ module.exports = {
                             if (err) callback(err);
                             callback(null, user);
                         });
-                }
-                console.log('找到用户了。。');
-                User.update({
-                    nameId: user.nameId
-                }, {
-                    name: newName
-                }, function (err, user) {
-                    if (err) throw  err;
-                    callback(null, user);
-                });
+                } else {
+                    console.log('找到用户了。。' + user);
+                    User.update({
+                        nameId: user.nameId
+                    }, {
+                        name: newName
+                    }, function (err, user) {
+                        if (err) throw  err;
+                        callback(null, user);
+                    });
 
+                }
             });
     },
 
