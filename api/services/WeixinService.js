@@ -29,7 +29,7 @@ var WeixinService = {
         } else if (content === 'menu' || content === 'm') {
             callback(null, constants.reply.menu);
             return;
-        } else if (new RegExp('^[=]{1}[^=-+]*$').test(content)) {
+        } else if (new RegExp('^[=]{1}[^=+-]*$').test(content)) {
             ActionsService.setDisplayName(message.FromUserName, content, function (err, result) {
                 if (err) {
                     callback(null, contants.reply.systemErr);

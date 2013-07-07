@@ -57,4 +57,11 @@ describe('Sohub', function () {
 
     });
 
+
+    describe('action pattern test',function(){
+        it('should be set display name action',function(){
+            assert.equal(new RegExp('^[=]{1}[^=+-]*$').test('=junv'),true);
+        });
+    });
+
 })
