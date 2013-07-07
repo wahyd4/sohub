@@ -13,6 +13,7 @@ module.exports = {
             name: newName
         }, function (err, user) {
             if (err) {
+                console.log('该用户以前没有创建用对象');
                 User.create({
                     nameId: nameId,
                     name: newName

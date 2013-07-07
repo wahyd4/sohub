@@ -13,9 +13,9 @@ var MessageService = {
         }
         var userName = '';
         User.getNameByNameId(message.FromUserName, function (err, name) {
-            if(err){
-                console.log('获取用户名出现错误.'+err);
-                throw err;
+            if (err) {
+                console.log('获取用户名出现错误.' + err);
+                return;
             }
             userName = name;
         });
