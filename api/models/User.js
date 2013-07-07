@@ -1,19 +1,20 @@
 module.exports = {
 
     attributes: {
-
+        nameId:'STRING',
         name: 'STRING'
 
     },
 
-    setName: function (oldName, newName, callback) {
+    setName: function (nameId, newName, callback) {
         User.update({
-            name: oldName
+            nameId: nameId
         }, {
             name: newName
         }).done(function (err, user) {
                 if (err) {
                     User.create({
+                        nameId:nameId,
                         name: newName
                     }).done(function (err, user) {
                             if (err) callback(err);
