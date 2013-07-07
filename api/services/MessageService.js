@@ -1,4 +1,4 @@
-var User = require('./User.js');
+var User = require('../models/User.js');
 var MessageService = {
     processTextMessage: function (message, callback) {
         var originalContent = message.Content;
