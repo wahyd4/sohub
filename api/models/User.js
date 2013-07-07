@@ -1,7 +1,7 @@
 module.exports = {
 
     attributes: {
-        nameId:'STRING',
+        nameId: 'STRING',
         name: 'STRING'
 
     },
@@ -11,19 +11,19 @@ module.exports = {
             nameId: nameId
         }, {
             name: newName
-        }).done(function (err, user) {
-                if (err) {
-                    User.create({
-                        nameId:nameId,
-                        name: newName
-                    }).done(function (err, user) {
-                            if (err) callback(err);
-                            callback(null, user);
-                        });
-                }
-                callback(null, user);
+        }, function (err, user) {
+            if (err) {
+                User.create({
+                    nameId: nameId,
+                    name: newName
+                }).done(function (err, user) {
+                        if (err) callback(err);
+                        callback(null, user);
+                    });
+            }
+            callback(null, user);
 
-            });
+        });
     }
 
 };
