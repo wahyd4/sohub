@@ -10,7 +10,7 @@ module.exports = {
         User.find({
             nameId: nameId
         }).done(function (err, user) {
-                if (err) {
+                if (err || user === undefined) {
                     console.log('该用户以前没有创建用对象');
                     User.create({
                         nameId: nameId,

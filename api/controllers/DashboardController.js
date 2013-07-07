@@ -49,7 +49,14 @@ var DashboardController = {
 
     },
     spike: function(req,res){
-        res.send('yyyyyyyyyy');
+        User.find({
+            name:'test'
+        }).done(function(err,user){
+                if(err){
+                    res.send('fuck');
+                }
+                res.send('==='+user);
+            });
     }
 
 };
