@@ -7,24 +7,30 @@ module.exports = {
     },
 
     setName: function (nameId, newName, callback) {
-        User.update({
+        User.find({
             nameId: nameId
-        }, {
-            name: newName
-        }, function (err, user) {
-            if (err) {
-                console.log('该用户以前没有创建用对象');
-                User.create({
-                    nameId: nameId,
+        }).done(function (err, user) {
+                if (err) {
+                    console.log('该用户以前没有创建用对象');
+                    User.create({
+                        nameId: nameId,
+                        name: newName
+                    }).done(function (err, user) {
+                            if (err) callback(err);
+                            callback(null, user);
+                        });
+                }
+                console.log('找到用户了。。');
+                User.update({
+                    nameId: user.nameId
+                }, {
                     name: newName
-                }).done(function (err, user) {
-                        if (err) callback(err);
-                        callback(null, user);
-                    });
-            }
-            callback(null, user);
+                }, function (err, user) {
+                    if (err) throw  err;
+                    callback(null, user);
+                });
 
-        });
+            });
     },
 
     getNameByNameId: function (nameId, callback) {
