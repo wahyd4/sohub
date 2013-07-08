@@ -46,7 +46,7 @@ $(document).ready(function () {
     processBar();
 
     //get json
-    $.get('/dashboard/text', function (json) {
+    $.get('/message/text', function (json) {
 //        console.log('request success...');
     })
         .done(function (json) {
@@ -104,7 +104,7 @@ $(document).ready(function () {
 
     //delay 1 minute to display images
     setTimeout(function () {
-        $.get('/dashboard/image',function (json) {
+        $.get('/message/image',function (json) {
             var imageContainer = $('.image-content');
             for (var i = 0; i < json.length; i++) {
                 var item = $('<a href="#"></a>');

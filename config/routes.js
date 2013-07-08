@@ -26,20 +26,20 @@ module.exports.routes = {
     '/': {
         controller: 'home'
     },
-    'get /dashboard': {
-        controller: 'dashboard',
+    'get /message': {
+        controller: 'message',
         action: 'view'
     },
-    'get /dashboard/text': {
-        controller: 'dashboard',
+    'get /message/text': {
+        controller: 'message',
         action: 'viewText'
     },
-    'get /dashboard/image': {
-        controller: 'dashboard',
+    'get /message/image': {
+        controller: 'message',
         action: 'viewImage'
     },
-    'get /dashboard/notice':{
-        controller: 'dashboard',
+    'get /message/notice':{
+        controller: 'message',
         action: 'viewNotice'
     },
     'get /wx/query': {
@@ -51,7 +51,7 @@ module.exports.routes = {
         action: 'query'
     },
     'get /mock': {
-        controller: 'dashboard',
+        controller: 'message',
         action: 'mockData'
     },
     'get /weibo/index': {
@@ -59,7 +59,7 @@ module.exports.routes = {
         action: 'index'
     },
     'get /spike':{
-        controller: 'dashboard',
+        controller: 'message',
         action: 'spike'
     }
 
