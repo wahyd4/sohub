@@ -51,7 +51,7 @@ $(document).ready(function () {
     })
         .done(function (json) {
             console.log(json);
-            var content = $('.content');
+            var content = $('.text-content');
             for (var i = 0; i < json.length; i++) {
                 var item = $('<li class="alert"></li>');
                 item.append('<blockquote>' + json[i].content + '</blockquote>');
@@ -115,20 +115,67 @@ $(document).ready(function () {
         }).done(function () {
 
                 $('.image-content').nivoSlider({
-                    effect: 'random', // Specify sets like: 'fold,fade,sliceDown'
-                    slices: 15, // For slice animations
-                    boxCols: 8, // For box animations
-                    boxRows: 4, // For box animations
-                    animSpeed: 600, // Slide transition speed
-                    pauseTime: 6000, // How long each slide will show
-                    startSlide: 0, // Set starting Slide (0 index)
-                    directionNav: false, // Next & Prev navigation
-                    controlNav: false, // 1,2,3... navigation
-                    controlNavThumbs: false, // Use thumbnails for Control Nav
-                    pauseOnHover: false, // Stop animation while hovering
-                    manualAdvance: false // Force manual transitions
+                    effect: 'random',
+                    slices: 15,
+                    boxCols: 8,
+                    boxRows: 4,
+                    animSpeed: 600,
+                    pauseTime: 6000,
+                    startSlide: 0,
+                    directionNav: false,
+                    controlNav: false,
+                    controlNavThumbs: false,
+                    pauseOnHover: false,
+                    manualAdvance: false
                 });
             });
     }, interval - 1000 * 30);
+
+    // delay almost 2 minute to display notice message
+    setTimeout(function () {
+        $.get('/message/notice', function (json) {
+            var noticeContainer = $('.notice-content');
+            for (var i = 0; i < json.length; i++) {
+                var item = $('<li class="alert"></li>');
+                item.append('<blockquote>' + json[i].content + '</blockquote>');
+                switch (i % 4) {
+                    case 3:
+                        item.addClass('alert-info');
+                        break;
+                    case 2:
+                        item.addClass('alert-error');
+                        break;
+                    case 1:
+                        item.addClass('alert-success');
+                        break;
+                    default:
+                        break;
+
+                }
+                var footprint = $('<div></div>').addClass('footprint');
+                footprint.append('<div>发送者：' + json[i].fromUser + '</div>');
+                footprint.append('<div>发送于：' + timeSince(json[i].createTime) + '</div>');
+                item.append(footprint);
+                noticeContainer.append(item);
+
+            }
+
+            var flag = textMessageCount;
+            setInterval(function () {
+                var children = noticeContainer.children();
+                if (flag >= children.length) {
+                    flag = 0;
+                }
+                hideAllChildren('.notice-container');
+                //show the next children nodes
+                for (var i = flag; i < flag + textMessageCount; i++) {
+                    $(children[i]).show('slow');
+                }
+                //flag +3
+                flag = flag + textMessageCount;
+
+            }, 1000 * 10);
+        });
+    }, interval * 2 - 1000 * 30);
 
 });
