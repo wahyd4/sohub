@@ -54,25 +54,17 @@ var WeixinService = {
             client.put_object({  bucket: process.env.BUCKET, object: tempFileName, srcFile: tempFileName, gzip: false},
                 function (err, results) {
                     if (err) throw err;
-
-                    User.getNameByNameId(message.FromUserName, function (err, name) {
-                        if (err) {
-                            callback(null, constants.reply.systemErr);
-                            return;
-                        }
-                        Image.create({
-                            pictureUrl: process.env.IMAGE_BASE_URL + '/' + tempFileName,
-                            createTime: new Date().getTime(),
-                            fromUser: name,
-                            toUser: message.ToUserName,
-                            messageType: message.MsgType,
-                            messageId: message.MsgId
-                        }).done(function (err, message) {
-                                callback('图片已经成功收到！');
-                            });
-
-                    });
-
+                    //store image in database
+                    Image.create({
+                        pictureUrl: process.env.IMAGE_BASE_URL + '/' + tempFileName,
+                        createTime: new Date().getTime(),
+                        fromUser: message.FromUserName,
+                        toUser: message.ToUserName,
+                        messageType: message.MsgType,
+                        messageId: message.MsgId
+                    }).done(function (err, message) {
+                            callback('图片已经成功收到！');
+                        });
                 }
             );
         }).pipe(fs.createWriteStream(tempFileName));
