@@ -39,8 +39,11 @@ module.exports = {
             nameId: nameId
         }).done(function (err, user) {
                 if (err) throw err;
-                console.log(user);
+                if (user === undefined) {
+                    callback(err, nameId);
+                }
                 callback(err, user.name);
+
             });
     }
 
