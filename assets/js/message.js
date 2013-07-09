@@ -160,19 +160,19 @@ $(document).ready(function () {
 
             }
 
-            var flag = textMessageCount;
+            var flag_2 = textMessageCount;
             setInterval(function () {
                 var children = noticeContainer.children();
-                if (flag >= children.length) {
-                    flag = 0;
+                if (flag_2 >= children.length) {
+                    flag_2 = 0;
                 }
-                hideAllChildren('.notice-container');
+                hideAllChildren('.notice-content');
                 //show the next children nodes
-                for (var i = flag; i < flag + textMessageCount; i++) {
+                for (var i = flag_2; i < flag_2 + textMessageCount; i++) {
                     $(children[i]).show('slow');
                 }
-                //flag +3
-                flag = flag + textMessageCount;
+                //flag_2 +3
+                flag_2 = flag_2 + textMessageCount;
 
             }, 1000 * 10);
         });

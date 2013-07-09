@@ -69,9 +69,12 @@ h1 a {
 .sohub {
     margin-top: 50px;
     text-align: center;
-    font-family: 'Text Me One', sans-serif;
+    font-family: 'Cherry Swash', cursive;
 }
 
 .sohub h1 {
-    margin-bottom: 1.5em;
+    margin-bottom: 1em;
+    font-size: 85px;
+    font-family: 'UnifrakturMaguntia', cursive;
+
 }
