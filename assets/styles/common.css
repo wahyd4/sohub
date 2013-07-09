@@ -48,12 +48,11 @@ h1 a {
     font-size: 0.9em;
 }
 
-
 .image-content figure img {
     max-width: 100%;
 }
 
-.message-process-bar{
+.message-process-bar {
     margin-top: -20px;
 }
 
@@ -65,4 +64,14 @@ h1 a {
 
 .footer a {
     margin-left: 40px;
+}
+
+.sohub {
+    margin-top: 50px;
+    text-align: center;
+    font-family: 'Text Me One', sans-serif;
+}
+
+.sohub h1 {
+    margin-bottom: 1.5em;
 }
