@@ -44,7 +44,9 @@ function hideAllChildren(div) {
  * @returns {boolean}
  */
 var assertOnPage = function (pageName) {
-    if (window.location.href.indexOf(pageName) === -1) {
+    if (window.location.href.indexOf(pageName) == -1) {
         return false;
     }
+
+    return true;
 }

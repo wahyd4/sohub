@@ -4,14 +4,14 @@ var MessageController = {
     },
 
     viewText: function (req, res) {
-        Message.findAll({messageType: 'text'}).sort('_id desc').done(function (err, messages) {
+        Message.findAll({messageType: 'text'}).sort('_id desc').limit(30).done(function (err, messages) {
             if (err) return res.send(err, 500);
             res.json(messages);
         });
     },
 
     viewNotice: function (req, res) {
-        Message.findAll({messageType: 'notice'}).sort('_id desc').done(function (err, messages) {
+        Message.findAll({messageType: 'notice'}).sort('_id desc').limit(30).done(function (err, messages) {
             if (err) return res.send(err, 500);
             res.json(messages);
         });
@@ -48,14 +48,14 @@ var MessageController = {
             });
 
     },
-    spike: function(req,res){
+    spike: function (req, res) {
         User.find({
-            name:'test'
-        }).done(function(err,user){
-                if(err){
+            name: 'test'
+        }).done(function (err, user) {
+                if (err) {
                     res.send('fuck');
                 }
-                res.send('==='+user);
+                res.send('===' + user);
             });
     }
 
