@@ -31,9 +31,20 @@ function timeSince(date) {
  * 隐藏此对象的所有只节点
  * @param div jquery obj
  */
-function hideAllChildren(div){
+function hideAllChildren(div) {
     var children = $(div).children();
     for (var j = 0; j < children.length; j++) {
         $(children[j]).hide();
+    }
+}
+
+/**
+ * 通过判断当前URL中是否包含当前js所需的页面名称，来选择是否加载js 事件
+ * @param pageName  期望的页面URL 名称段
+ * @returns {boolean}
+ */
+var assertOnPage = function (pageName) {
+    if (window.location.href.indexOf(pageName) === -1) {
+        return false;
     }
 }

@@ -1,5 +1,9 @@
 $(document).ready(function () {
 
+    if (!assertOnPage('message')) {
+        return false;
+    }
+
     var interval = 1000 * 60;
     var nextChildToShow = 1;
     var textMessageCount = 4;
