@@ -6,7 +6,7 @@ $(document).ready(function () {
 
     var interval = 1000 * 60;
     var nextChildToShow = 1;
-    var textMessageCount = 4;
+    var textMessageCount = 2;
 
     /**
      * 为消息显示进度条

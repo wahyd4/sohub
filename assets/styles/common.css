@@ -1,3 +1,8 @@
+body{
+    overflow: hidden;
+    background-color: #1f8dd6;
+}
+
 a {
     text-decoration: none;
 }
@@ -8,11 +13,10 @@ h1 a {
 }
 
 .main-container {
-    height: 540px;
-    border: 1px solid #000000;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
     padding: 10px;
-    box-shadow: 0px 0px 10px 7px #777777;
 }
 
 .main-container ul {
@@ -38,6 +42,7 @@ h1 a {
 
 .content li.alert {
     padding: 19px 35px 19px 14px;
+    height: 200px;
 }
 
 .content li blockquote {
@@ -57,12 +62,19 @@ h1 a {
 }
 
 .footer {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    background: rgba(29,59,80,0.6);
+    position:fixed;
+    bottom:0;
     font-size: 14px;
+    color: #ffffff;
+    width:100%;
+    left: 0;
+    padding: 5px 10px;
+    text-align: center;
 }
 
 .footer a {
+    color: #ffffff;
     margin-left: 40px;
 }
 
@@ -77,4 +89,11 @@ h1 a {
     font-size: 85px;
     font-family: 'UnifrakturMaguntia', cursive;
 
+}
+
+.big-screen-container .progress{
+    position:fixed;
+    bottom:11px;
+    width: 100%;
+    left: 0;
 }

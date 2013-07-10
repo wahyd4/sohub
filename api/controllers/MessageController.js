@@ -1,6 +1,6 @@
 var MessageController = {
     view: function (req, res) {
-        res.view();
+        res.view('message/view',{layout:'layout/bigscreen.ejs'});
     },
 
     viewText: function (req, res) {
