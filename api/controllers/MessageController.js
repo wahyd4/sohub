@@ -27,7 +27,7 @@ var MessageController = {
 
     mockData: function (req, res) {
         Message.create({
-            content: 'Hello sohub,现在的时间为' + new Date().toDateString(),
+            content: '如果你的代码易于阅读，那么代码中bug也将会很少，因为一些bug可以很容被调试，并且，其他开发者参与你项目时的门槛也会比较低。因此，如果项目中有多人参与，采取一个有共识的编码风格约定非常有必要。',
             createTime: new Date().getTime(),
             fromUser: 'oGHz6jqRjNHwBo_a_s',
             toUser: 'gh_418963502e3c',

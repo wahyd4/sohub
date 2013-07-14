@@ -6,24 +6,25 @@ $(document).ready(function () {
 
     var interval = 1000 * 60;
     var nextChildToShow = 1;
-    var textMessageCount = 2;
+    var textMessageCount = 1;
+    var timeToShowNextMessage = 1000 * 5;
 
-    /**
-     * 为消息显示进度条
-     */
-    function processBar() {
-        var flag = 1;
-        var int = setInterval(function () {
-            var bar = $('.bar');
-            bar.css('width', flag + '%');
-            flag += 100 / (interval / 1000);
-            if (flag > 100 - 100 / (interval / 1000)) {
-                bar.css('width', '100%');
-                clearInterval(int);
-                bar.css('width', '1%');
-            }
-        }, 1000);
-    }
+//    /**
+//     * 为消息显示进度条
+//     */
+//    function processBar() {
+//        var flag = 1;
+//        var int = setInterval(function () {
+//            var bar = $('.bar');
+//            bar.css('width', flag + '%');
+//            flag += 100 / (interval / 1000);
+//            if (flag > 100 - 100 / (interval / 1000)) {
+//                bar.css('width', '100%');
+//                clearInterval(int);
+//                bar.css('width', '1%');
+//            }
+//        }, 1000);
+//    }
 
     /**
      * 循环显示不同类型的消息
@@ -37,8 +38,6 @@ $(document).ready(function () {
             var nextContainer = containers[nextChildToShow] || containers[0];
             $(nextContainer).show('slow');
 
-            processBar();
-
             if (nextChildToShow === containers.length) {
                 nextChildToShow = 0;
             }
@@ -47,38 +46,24 @@ $(document).ready(function () {
     }
 
     cycling(interval, nextChildToShow);
-    processBar();
 
-    //get json
     $.get('/message/text', function (json) {
-//        console.log('request success...');
     })
         .done(function (json) {
-            console.log(json);
             var content = $('.text-content');
             for (var i = 0; i < json.length; i++) {
-                var item = $('<li class="alert"></li>');
-                item.append('<blockquote>' + json[i].content + '</blockquote>');
-                switch (i % 4) {
-                    case 3:
-                        item.addClass('alert-info');
-                        break;
-                    case 2:
-                        item.addClass('alert-error');
-                        break;
-                    case 1:
-                        item.addClass('alert-success');
-                        break;
-                    default:
-                        break;
+                var item = $('<li style="display: none"></li>');
 
-                }
                 var footprint = $('<div></div>').addClass('footprint');
-                footprint.append('<div>发送者：' + json[i].fromUser + '</div>');
-                footprint.append('<div>发送于：' + timeSince(json[i].createTime) + '</div>');
+                footprint.append('<img src="/images/elephant.jpg">');
+                footprint.append('<div>' + timeSince(json[i].createTime) + '</div>');
                 item.append(footprint);
-                content.append(item);
 
+                if (i === 0) {
+                    item.css('display', 'block');
+                }
+                item.append('<p>' + json[i].content + '</p>');
+                content.append(item);
             }
 
             var flag = textMessageCount;
@@ -99,8 +84,10 @@ $(document).ready(function () {
                 //flag +3
                 flag = flag + textMessageCount;
 
-            }, 1000 * 10);
+            }, timeToShowNextMessage);
 
+            //hide the loading text
+            $('#loading').hide();
         })
         .fail(function (error) {
             console.log('出错了！');
@@ -123,8 +110,8 @@ $(document).ready(function () {
                     slices: 15,
                     boxCols: 8,
                     boxRows: 4,
-                    animSpeed: 600,
-                    pauseTime: 6000,
+//                    animSpeed: 600,
+                    pauseTime: 5000,
                     startSlide: 0,
                     directionNav: false,
                     controlNav: false,
@@ -140,26 +127,13 @@ $(document).ready(function () {
         $.get('/message/notice', function (json) {
             var noticeContainer = $('.notice-content');
             for (var i = 0; i < json.length; i++) {
-                var item = $('<li class="alert"></li>');
-                item.append('<blockquote>' + json[i].content + '</blockquote>');
-                switch (i % 4) {
-                    case 3:
-                        item.addClass('alert-info');
-                        break;
-                    case 2:
-                        item.addClass('alert-error');
-                        break;
-                    case 1:
-                        item.addClass('alert-success');
-                        break;
-                    default:
-                        break;
+                var item = $('<li style="display: none"></li>');
 
-                }
                 var footprint = $('<div></div>').addClass('footprint');
-                footprint.append('<div>发送者：' + json[i].fromUser + '</div>');
-                footprint.append('<div>发送于：' + timeSince(json[i].createTime) + '</div>');
+                footprint.append('<img src="/images/elephant.jpg">');
+                footprint.append('<div>' + timeSince(json[i].createTime) + '</div>');
                 item.append(footprint);
+                item.append('<p>' + json[i].content + '</p>');
                 noticeContainer.append(item);
 
             }
@@ -178,7 +152,7 @@ $(document).ready(function () {
                 //flag_2 +3
                 flag_2 = flag_2 + textMessageCount;
 
-            }, 1000 * 10);
+            }, timeToShowNextMessage);
         });
     }, interval * 2 - 1000 * 30);
 
