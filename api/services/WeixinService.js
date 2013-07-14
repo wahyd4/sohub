@@ -13,6 +13,8 @@ var WeixinService = {
 
         } else if (message.MsgType === 'image') {
             return this.processImage(message, callback);
+        } else if (message.MsgType === 'event') {
+            return callback(null, constants.reply.help);
         } else {
             callback(null, constants.reply.unKnown);
         }
