@@ -13,8 +13,10 @@ $(document).ready(function () {
     /**
      * 切换容器中的文字
      * @param container
+     * @param flag 初始值
      */
     function slideDiv(container, flag) {
+        var flag = flag || textMessageCount;
         setInterval(function () {
             var children = container.children();
             if (flag >= children.length) {
@@ -75,7 +77,7 @@ $(document).ready(function () {
             }
 
 
-            slideDiv(content, textMessageCount);
+            slideDiv(content);
             //hide the loading text
             $('#loading').hide();
         })
@@ -107,7 +109,7 @@ $(document).ready(function () {
 
                 var footprint = $('<div></div>').addClass('footprint');
                 footprint.append('<img src="/images/elephant.jpg">');
-                footprint.append('<div>' + timeSince(json[i].createTime) + '</div>');
+                footprint.append('<div>' + json[i].fromUser + '发表于' + timeSince(json[i].createTime) + '</div>');
                 item.append(footprint);
                 item.append('<p>' + json[i].content + '</p>');
                 noticeContainer.append(item);
@@ -118,5 +120,34 @@ $(document).ready(function () {
 
         });
     }, interval * 2 - 1000 * 30);
+
+
+    // delay almost 2.5 minute to display notice message
+    setTimeout(function () {
+        $.get('/weibo', function (json) {
+            json = json.items;
+            console.log(json);
+            var weiboContainer = $('.weibo-content');
+            for (var i = 0; i < json.length; i++) {
+                var item = $('<li style="display: none"></li>');
+
+                var footprint = $('<div></div>').addClass('footprint');
+                footprint.append('<img src="' + json[i].user.avatar_hd + '">');
+                footprint.append('<div>' + json[i].user.name + '发布于' + timeSince(new Date(json[i].created_at)) + '</div>');
+                item.append(footprint);
+                var content = $('<div class="weibo"> </div>');
+                if (json[i].original_pic !== undefined) {
+                    content.append('<img src="' + json[i].original_pic + '"></img>');
+                }
+                content.append('<p>' + json[i].text + '</p>');
+                item.append(content);
+                weiboContainer.append(item);
+
+            }
+
+            slideDiv(weiboContainer, textMessageCount);
+
+        });
+    }, interval * 3 - 1000 * 30);
 
 });

@@ -15,13 +15,7 @@ h1 a {
     position: absolute;
     top: 200px;
     z-index: 50;
-
-    -webkit-transition: opacity 1s ease-in-out;
-    -webkit-animation-timing-function: ease-in-out;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-duration: 3s;
-    -webkit-animation-direction: alternate;
-
+    color: #ffffff;
 }
 
 .main-container {
@@ -66,6 +60,15 @@ h1 a {
 .image-content li img{
     width: 100%;
 
+}
+
+.weibo-content li .weibo{
+    max-height: 500px;
+    text-align: center;
+}
+
+.weibo-content li .weibo p {
+    text-align: left;
 }
 
 .content li.alert {
