@@ -9,22 +9,30 @@ $(document).ready(function () {
     var textMessageCount = 1;
     var timeToShowNextMessage = 1000 * 5;
 
-//    /**
-//     * 为消息显示进度条
-//     */
-//    function processBar() {
-//        var flag = 1;
-//        var int = setInterval(function () {
-//            var bar = $('.bar');
-//            bar.css('width', flag + '%');
-//            flag += 100 / (interval / 1000);
-//            if (flag > 100 - 100 / (interval / 1000)) {
-//                bar.css('width', '100%');
-//                clearInterval(int);
-//                bar.css('width', '1%');
-//            }
-//        }, 1000);
-//    }
+
+    /**
+     * 切换容器中的文字
+     * @param container
+     */
+    function slideDiv(container, flag) {
+        setInterval(function () {
+            var children = container.children();
+            if (flag >= children.length) {
+                //reset the flag to 0
+                flag = 0;
+            }
+            //hide all the children nodes
+            for (var j = 0; j < children.length; j++) {
+                $(children[j]).hide();
+            }
+            //show the next children nodes
+            for (var i = flag; i < flag + textMessageCount; i++) {
+                $(children[i]).show('slow');
+            }
+            //flag +3
+            flag = flag + textMessageCount;
+        }, timeToShowNextMessage);
+    }
 
     /**
      * 循环显示不同类型的消息
@@ -66,26 +74,8 @@ $(document).ready(function () {
                 content.append(item);
             }
 
-            var flag = textMessageCount;
-            setInterval(function () {
-                var children = content.children();
-                if (flag >= children.length) {
-                    //reset the flag to 0
-                    flag = 0;
-                }
-                //hide all the children nodes
-                for (var j = 0; j < children.length; j++) {
-                    $(children[j]).hide();
-                }
-                //show the next children nodes
-                for (var i = flag; i < flag + textMessageCount; i++) {
-                    $(children[i]).show('slow');
-                }
-                //flag +3
-                flag = flag + textMessageCount;
 
-            }, timeToShowNextMessage);
-
+            slideDiv(content, textMessageCount);
             //hide the loading text
             $('#loading').hide();
         })
@@ -95,31 +85,17 @@ $(document).ready(function () {
 
     //delay 1 minute to display images
     setTimeout(function () {
-        $.get('/message/image',function (json) {
+        $.get('/message/image', function (json) {
             var imageContainer = $('.image-content');
             for (var i = 0; i < json.length; i++) {
-                var item = $('<a href="#"></a>');
+                var item = $('<li></li>');
                 item.append('<img src="' + json[i].pictureUrl + '">');
                 imageContainer.append(item);
 
             }
-        }).done(function () {
+            slideDiv(imageContainer, textMessageCount);
 
-                $('.image-content').nivoSlider({
-                    effect: 'random',
-                    slices: 15,
-                    boxCols: 8,
-                    boxRows: 4,
-//                    animSpeed: 600,
-                    pauseTime: 5000,
-                    startSlide: 0,
-                    directionNav: false,
-                    controlNav: false,
-                    controlNavThumbs: false,
-                    pauseOnHover: false,
-                    manualAdvance: false
-                });
-            });
+        });
     }, interval - 1000 * 30);
 
     // delay almost 2 minute to display notice message
@@ -138,21 +114,8 @@ $(document).ready(function () {
 
             }
 
-            var flag_2 = textMessageCount;
-            setInterval(function () {
-                var children = noticeContainer.children();
-                if (flag_2 >= children.length) {
-                    flag_2 = 0;
-                }
-                hideAllChildren('.notice-content');
-                //show the next children nodes
-                for (var i = flag_2; i < flag_2 + textMessageCount; i++) {
-                    $(children[i]).show('slow');
-                }
-                //flag_2 +3
-                flag_2 = flag_2 + textMessageCount;
+            slideDiv(noticeContainer, textMessageCount);
 
-            }, timeToShowNextMessage);
         });
     }, interval * 2 - 1000 * 30);
 

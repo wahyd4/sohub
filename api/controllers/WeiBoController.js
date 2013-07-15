@@ -33,7 +33,8 @@ var WeiboController = {
                 console.error(err);
             } else {
                 console.log(statuses);
-                res.view(statuses);
+                res.json(statuses);
+//                res.view(statuses);
             }
         });
     }
