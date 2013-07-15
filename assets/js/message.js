@@ -56,7 +56,7 @@ $(document).ready(function () {
 
                 var footprint = $('<div></div>').addClass('footprint');
                 footprint.append('<img src="/images/elephant.jpg">');
-                footprint.append('<div>' + timeSince(json[i].createTime) + '</div>');
+                footprint.append('<div>' + json[i].fromUser + '发表于' + timeSince(json[i].createTime) + '</div>');
                 item.append(footprint);
 
                 if (i === 0) {
