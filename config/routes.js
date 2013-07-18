@@ -38,7 +38,7 @@ module.exports.routes = {
         controller: 'message',
         action: 'viewImage'
     },
-    'get /message/notice':{
+    'get /message/notice': {
         controller: 'message',
         action: 'viewNotice'
     },
@@ -58,9 +58,17 @@ module.exports.routes = {
         controller: 'weibo',
         action: 'index'
     },
-    'get /spike':{
+    'get /spike': {
         controller: 'message',
         action: 'spike'
+    },
+    'get /auth': {
+        controller: 'auth',
+        action: 'index'
+    },
+    'get /auth/google': {
+        controller: 'auth',
+        action: 'auth'
     }
 
 

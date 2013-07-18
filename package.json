@@ -4,13 +4,16 @@
     "version": "0.0.1",
     "description": "social media information hub and aggregator application",
     "dependencies": {
-        "sails": "0.8.91",
+        "sails": "0.8.93",
         "sails-mongo": "0.0.3",
         "optimist": "0.4.0",
         "wechat": "0.4.4",
         "nn-oss": "0.0.9",
         "request": "2.21.0",
-        "weibo": "0.6.9"
+        "weibo": "0.6.9",
+        "google-calendar":"1.0.0",
+        "passport": "> 0.0.0",
+        "passport-google-oauth": ">= 0.1.0"
     },
     "devDependencies": {
         "mocha": "*"
