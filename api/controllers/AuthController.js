@@ -1,11 +1,9 @@
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-var gcal = require('google-calendar');
-var util = require('util');
 
 passport.use(new GoogleStrategy({
-        clientID: '553555458366-bl2e989fn88t27recf2cgp74b3ogcdc1.apps.googleusercontent.com',
-        clientSecret: '8TNPb5ehq-t7g1uiwztaHmC7',
+        clientID: process.env.CLIENT_ID,
+        clientSecret: process.env.CLIENT_SECRET,
         callbackURL: "http://127.0.0.1:1337/auth/google"
 
     },function(accessToken, refreshToken, profile, done) {
@@ -32,8 +30,7 @@ passport.deserializeUser(function (obj, done) {
 
 
 var AuthController = {
-    index: passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/userinfo.profile',
-            'https://www.googleapis.com/auth/userinfo.email'] }),
+    index: passport.authenticate('google', { scope: ['openid', 'email', 'https://www.googleapis.com/auth/calendar'] }),
 
 
     auth:  passport.authenticate('google',function(req,res){

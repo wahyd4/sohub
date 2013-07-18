@@ -150,4 +150,30 @@ $(document).ready(function () {
         });
     }, interval * 3 - 1000 * 30);
 
+    setTimeout(function () {
+        $.get('/calendar', function (json) {
+            console.log(json);
+            var calendarContainer = $('.calendar-content');
+            for (var i = 0; i < json.length; i++) {
+                var item = $('<li style="display: none"></li>');
+
+                var footprint = $('<div></div>').addClass('footprint');
+                footprint.append('<p>'+json[i].location+'</p>');
+                footprint.append('<div>' + json[i].creator.displayName + '发布于' + timeSince(new Date(json[i].created)) + '</div>');
+                item.append(footprint);
+                var content = $('<div class="weibo"> </div>');
+//                if (json[i].original_pic !== undefined) {
+//                    content.append('<img src="' + json[i].original_pic + '"></img>');
+//                }
+                content.append('<p>' + json[i].summary + '</p>');
+                item.append(content);
+                calendarContainer.append(item);
+
+            }
+
+            slideDiv(calendarContainer, textMessageCount);
+
+        });
+    }, interval * 4 - 1000 * 30);
+
 });

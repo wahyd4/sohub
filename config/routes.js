@@ -69,6 +69,10 @@ module.exports.routes = {
     'get /auth/google': {
         controller: 'auth',
         action: 'auth'
+    },
+    'get /calendar': {
+        controller: 'calendar',
+        action: 'index'
     }
 
 
