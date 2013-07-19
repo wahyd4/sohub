@@ -153,18 +153,17 @@ $(document).ready(function () {
     setTimeout(function () {
         $.get('/calendar', function (json) {
             console.log(json);
+            json = json.items;
             var calendarContainer = $('.calendar-content');
             for (var i = 0; i < json.length; i++) {
                 var item = $('<li style="display: none"></li>');
 
                 var footprint = $('<div></div>').addClass('footprint');
-                footprint.append('<p>'+json[i].location+'</p>');
-                footprint.append('<div>' + json[i].creator.displayName + '发布于' + timeSince(new Date(json[i].created)) + '</div>');
+                footprint.append('<img src="/images/elephant.jpg">');
+                footprint.append('<div>' + json[i].organizer.displayName + '发布于' + timeSince(new Date(json[i].created)) + '</div>');
                 item.append(footprint);
-                var content = $('<div class="weibo"> </div>');
-//                if (json[i].original_pic !== undefined) {
-//                    content.append('<img src="' + json[i].original_pic + '"></img>');
-//                }
+                var content = $('<div class="calendar"> </div>');
+                content.append('<p>从' + json[i].start.dateTime + '到' + json[i].end.dateTime + '</p>')
                 content.append('<p>' + json[i].summary + '</p>');
                 item.append(content);
                 calendarContainer.append(item);
